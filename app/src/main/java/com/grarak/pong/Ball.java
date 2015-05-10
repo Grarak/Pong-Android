@@ -90,7 +90,7 @@ public class Ball extends DrawObject {
 
     public void reset() {
         position = null;
-        velocity = null;
+        velocity.y = 0;
         gameover = false;
         reset = false;
     }
