@@ -68,17 +68,14 @@ public class UIParent extends View {
             }
 
             private void reset() {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(1000);
-                            ball.reset();
-                            paddleOne.reset();
-                            paddleTwo.reset();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                new Thread(() -> {
+                    try {
+                        Thread.sleep(1000);
+                        ball.reset();
+                        paddleOne.reset();
+                        paddleTwo.reset();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
                 }).start();
             }

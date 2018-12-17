@@ -43,39 +43,30 @@ public class MainActivity extends Activity {
         final UIParent uiParent = new UIParent(this);
         setContentView(uiParent);
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true)
-                    try {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                uiParent.invalidate();
-                                fps++;
-                            }
-                        });
-                        Thread.sleep(17);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                        break;
-                    }
-            }
+        new Thread(() -> {
+            while (true)
+                try {
+                    runOnUiThread(() -> {
+                        uiParent.invalidate();
+                        fps++;
+                    });
+                    Thread.sleep(17);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    break;
+                }
         }).start();
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true)
-                    try {
-                        Thread.sleep(1000);
-                        log("FPS: " + fps);
-                        fps = 0;
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                        break;
-                    }
-            }
+        new Thread(() -> {
+            while (true)
+                try {
+                    Thread.sleep(1000);
+                    log("FPS: " + fps);
+                    fps = 0;
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    break;
+                }
         }).start();
     }
 
